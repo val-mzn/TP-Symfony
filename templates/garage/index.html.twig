@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GarageController!{% endblock %}
+
+{% block body %}
+<h1 style="text-align: center;">Liste des véhicules disponible</h1>
+
+    <table class="table table-dark table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Plaque</th>
+                <th>Kilometrage</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vehicule in vehicules %}
+            <tr>
+                <td>{{ vehicule.plaque }}</td>
+                <td>{{ vehicule.kilometrage }}</td>
+                <td>{{ vehicule.etat }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('vehicule_show', {'id': vehicule.id}) }}">louer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Pas de véhicule disponible trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
