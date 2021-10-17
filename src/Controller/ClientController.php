@@ -16,19 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class ClientController extends AbstractController
 {
     /**
-     * @Route("/", name="client_index", methods={"GET"})
+     * @Route("/", name="client_index", methods={"GET","POST"})
      */
-    public function index(ClientRepository $clientRepository): Response
-    {
-        return $this->render('client/index.html.twig', [
-            'clients' => $clientRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="client_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
+    public function index(Request $request, ClientRepository $clientRepository): Response
     {
         $client = new Client();
         $form = $this->createForm(ClientType::class, $client);
@@ -42,9 +32,9 @@ class ClientController extends AbstractController
             return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('client/new.html.twig', [
-            'client' => $client,
-            'form' => $form,
+        return $this->render('client/index.html.twig', [
+            'clients' => $clientRepository->findAll(),
+            'form' => $form->createView(),
         ]);
     }
 

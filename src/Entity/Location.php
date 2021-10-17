@@ -28,11 +28,6 @@ class Location
     private $fin;
 
     /**
-     * @ORM\Column(type="boolean", nullable=false)
-     */
-    private $en_cours;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Client", inversedBy="locations")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id", nullable=false)
      */
@@ -69,18 +64,6 @@ class Location
     public function setFin(\DateTimeInterface $fin): self
     {
         $this->fin = $fin;
-
-        return $this;
-    }
-
-    public function getEnCours(): ?bool
-    {
-        return $this->en_cours;
-    }
-
-    public function setEnCours(bool $en_cours): self
-    {
-        $this->en_cours = $en_cours;
 
         return $this;
     }

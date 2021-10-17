@@ -16,19 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class LocationController extends AbstractController
 {
     /**
-     * @Route("/", name="location_index", methods={"GET"})
+     * @Route("/", name="location_index", methods={"GET", "POST"})
      */
-    public function index(LocationRepository $locationRepository): Response
-    {
-        return $this->render('location/index.html.twig', [
-            'locations' => $locationRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="location_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
+    public function index(LocationRepository $locationRepository, Request $request): Response
     {
         $location = new Location();
         $form = $this->createForm(LocationType::class, $location);
@@ -42,9 +32,9 @@ class LocationController extends AbstractController
             return $this->redirectToRoute('location_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('location/new.html.twig', [
-            'location' => $location,
-            'form' => $form,
+        return $this->render('location/index.html.twig', [
+            'locations' => $locationRepository->findAll(),
+            'form' => $form->createView(),
         ]);
     }
 

@@ -2,42 +2,91 @@
 
 {% block title %}Client index{% endblock %}
 
+
+{% block stylesheets %}
+<style>
+    #client div {
+        margin: 0.2rem 1rem 0.2rem 1rem;
+        height: 2rem;
+    }
+
+    #client div label {
+        float: left;
+        width: 7rem;
+    }
+
+    #client div input {
+        float: right;
+        width: 15rem;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
-    <h1 style="text-align: center;">Liste des clients</h1>
 
-    <table class="table table-dark table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Telephone</th>
-                <th>Adresse</th>
-                <th>Ville</th>
-                <th>Cp</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<table class="table table-dark table-striped table-bordered">
+    <thead>
+        <tr>
+            <th colspan="7"><h1 style="text-align: center;">Liste des clients</h1></th>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Telephone</th>
+            <th>Adresse</th>
+            <th>Ville</th>
+            <th>Cp</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for client in clients %}
-            <tr>
-                <td>{{ client.nom }}</td>
-                <td>{{ client.prenom }}</td>
-                <td>{{ client.telephone }}</td>
-                <td>{{ client.adresse }}</td>
-                <td>{{ client.ville }}</td>
-                <td>{{ client.cp }}</td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('client_show', {'id': client.id}) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">Pas de client trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <tr>
+            <td>{{ client.nom }}</td>
+            <td>{{ client.prenom }}</td>
+            <td>{{ client.telephone }}</td>
+            <td>{{ client.adresse }}</td>
+            <td>{{ client.ville }}</td>
+            <td>{{ client.cp }}</td>
+            <td>
+                <a class="btn btn-secondary" href="{{ path('client_show', {'id': client.id}) }}">Voir</a>
+                <a class="btn btn-primary" href="{{ path('client_edit', {'id': client.id}) }}">Modifier</a>
 
-    <a class="btn btn-primary" href="{{ path('client_new') }}">Create new</a>
+                <form style="display: inline" method="post" action="{{ path('client_delete', {'id': client.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ client.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+                
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="8">Pas de client trouvé</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter un client</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nouveau client</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button class="btn btn-primary">{{ button_label|default('Sauvegarder') }}</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
