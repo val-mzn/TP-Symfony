@@ -4,7 +4,7 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item"> <a href="#" class="nav-link text-white" aria-current="page"> <i class="fa fa-home"></i><span class="ms-2">Home</span> </a> </li>
+        <li class="nav-item"> <a href="{{ path('home')}}" class="nav-link text-white {% if app.request.get('_route') starts with 'home' %}active{% endif %}" aria-current="page"> <i class="fa fa-home"></i><span class="ms-2">Home</span> </a> </li>
         <li> <a href="{{ path('client_index')}}" class="nav-link text-white {% if app.request.get('_route') starts with 'client' %}active{% endif %}"> <i class="fa fa-user"></i><span class="ms-2">Clients</span> </a> </li>
         <li> <a href="{{ path('location_index')}}" class="nav-link text-white {% if app.request.get('_route') starts with 'location' %}active{% endif %}"> <i class="fa fa-suitcase"></i><span class="ms-2">Locations</span> </a> </li>
         <li> <a href="{{ path('vehicule_index')}}" class="nav-link text-white {% if app.request.get('_route') starts with 'vehicule' %}active{% endif %}"> <i class="fa fa-car"></i><span class="ms-2">Vehicules</span> </a> </li>
