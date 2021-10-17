@@ -6,6 +6,7 @@ use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
@@ -46,6 +47,7 @@ class Client
 
     /**
      * @ORM\Column(type="integer", length=6, nullable=true)
+     * @Assert\GreaterThan(value = 0)
      */
     private $cp;
 
@@ -164,5 +166,10 @@ class Client
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nom . " " . $this->prenom;
     }
 }

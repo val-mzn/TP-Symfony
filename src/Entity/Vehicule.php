@@ -20,7 +20,7 @@ class Vehicule
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=6, nullable=false)
+     * @ORM\Column(type="string", length=8, nullable=false)
      */
     private $plaque;
 
@@ -131,5 +131,10 @@ class Vehicule
         $this->modele = $modele;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->modele->getMarque()->getNom() . " " . $this->modele->getNom() . " " . $this->plaque;
     }
 }

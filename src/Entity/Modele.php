@@ -10,8 +10,15 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ModeleRepository::class)
  */
-class Modele extends Marque
+class Modele
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
     /**
      * @ORM\Column(type="string", length=30, nullable=false)
      */
@@ -26,6 +33,12 @@ class Modele extends Marque
      * @ORM\OneToMany(targetEntity="Vehicule", mappedBy="modele")
      */
     private $vehicules;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Marque::class, inversedBy="modeles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $marque;
 
     public function __construct()
     {
@@ -82,6 +95,18 @@ class Modele extends Marque
                 $vehicule->setModele(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMarque(): ?Marque
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(?Marque $marque): self
+    {
+        $this->marque = $marque;
 
         return $this;
     }

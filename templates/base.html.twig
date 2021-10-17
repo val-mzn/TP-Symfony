@@ -5,6 +5,33 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
+        <style>
+            body {
+                background: linear-gradient(135deg, #8BC6EC, #9599E2, #8BC6EC, #9599E2);
+                background-size: 400% 400%;
+                animation: gradient 15s ease infinite;
+                height: 100vh;
+            }
+
+            @keyframes gradient {
+                0% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+        </style>
+        <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+         <script defer src="/node_modules/@fortawesome/fontawesome-free/js/brands.js"></script>
+        <script defer src="/node_modules/@fortawesome/fontawesome-free/js/solid.js"></script>
+        <script defer src="/node_modules/@fortawesome/fontawesome-free/js/fontawesome.js"></script>
+        
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
@@ -14,6 +41,11 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="d-flex" id="wrapper">
+            {% include "sidebar.html.twig" %}
+            <div class="container-fluid" style="padding: 3rem;">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
     </body>
 </html>
