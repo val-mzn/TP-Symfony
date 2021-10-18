@@ -37,6 +37,7 @@ class LocationController extends AbstractController
         foreach($locations as $l){
             $duration = $l->getFin()->getTimestamp() - $l->getDebut()->getTimestamp();
             $l->duree = $duration/60/60/24;
+            $l->tarif = $l->getVehicule()->getModele()->getTarif();
             $l->prix = $duration/60/60/24 * $l->getVehicule()->getModele()->getTarif();
             array_push($locations_with_price, $l);
         }
@@ -52,6 +53,12 @@ class LocationController extends AbstractController
      */
     public function show(Location $location): Response
     {
+
+        $duration = $location->getFin()->getTimestamp() - $location->getDebut()->getTimestamp();
+        $location->duree = $duration/60/60/24;
+        $location->tarif = $location->getVehicule()->getModele()->getTarif();
+        $location->prix = $duration/60/60/24 * $location->getVehicule()->getModele()->getTarif();
+
         return $this->render('location/show.html.twig', [
             'location' => $location,
         ]);

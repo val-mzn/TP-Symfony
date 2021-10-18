@@ -16,16 +16,16 @@
     </thead>
     <tbody>
         <tr>
-            <th>Id</th>
-            <td>{{ location.id }}</td>
-        </tr>
-        <tr>
             <th>Client</th>
-            <td>{{ location.client }}</td>
+            <td> <a href="{{ path('client_show', {'id': location.client.id}) }}">
+                    {{ location.client }}
+                </a></td>
         </tr>
         <tr>
             <th>Véhicule</th>
-            <td>{{ location.vehicule }}</td>
+            <td><a href="{{ path('vehicule_show', {'id': location.vehicule.id}) }}">
+                {{ location.vehicule }}
+            </a></td>
         </tr>
         <tr>
             <th>Debut</th>
@@ -36,6 +36,15 @@
             <td>{{ location.fin ? location.fin|date('Y-m-d') : '' }}</td>
         </tr>
 
+        <tr>
+            <th>Duree</th>
+            <td>{{ location.duree}} jours</td>
+        </tr>
+
+        <tr>
+            <th>Prix</th>
+            <td>{{ location.prix|number_format(0, ',', ' ') }}€ ({{location.tarif}}/j)</td>
+        </tr>
     </tbody>
 </table>
 

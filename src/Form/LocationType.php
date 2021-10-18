@@ -14,7 +14,6 @@ class LocationType extends AbstractType
         $builder
             ->add('debut')
             ->add('fin')
-            #->add('en_cours')
             ->add('client')
             ->add('vehicule')
         ;

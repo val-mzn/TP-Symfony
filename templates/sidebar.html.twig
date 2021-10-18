@@ -6,7 +6,7 @@
     }
 </style>
 
-<div id="sidebar" class="d-flex flex-column vh-100 flex-shrink-0 p-3 text-white bg-dark" style="width: 250px;">
+<div id="sidebar" class="d-flex flex-column vh-100 flex-shrink-0 p-3 text-white bg-dark" style="width: 250px; z-index: 100">
     <h3>Location rapide</h1>
         </a>
         <hr>
@@ -34,7 +34,7 @@
 
     window.addEventListener('mousemove', e => {
         mousePos = { x: e.pageX, y: e.pageY };
-        if (mousePos.x < 50) { openNav(); }
+        if (mousePos.x < 10) { openNav(); }
         if (mousePos.x > 250) { closeNav(); }
     });
 
@@ -45,4 +45,5 @@
     function closeNav() {
         document.getElementById("sidebar").style.transform = "translate(-240px, 0)"
     }
+    closeNav();
 </script>

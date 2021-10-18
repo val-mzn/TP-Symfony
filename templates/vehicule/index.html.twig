@@ -46,7 +46,7 @@
             <td>{{ vehicule.modele }}</td>
 
             <td>{{ vehicule.plaque }}</td>
-            <td>{{ vehicule.kilometrage }}</td>
+            <td>{{ vehicule.kilometrage|number_format(0, ',', ' ') }}</td>
             <td>{{ vehicule.etat }}</td>
 
             <td>

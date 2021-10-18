@@ -14,8 +14,8 @@
     </thead>
     <tbody>
         <tr>
-            <th>Id</th>
-            <td>{{ vehicule.id }}</td>
+            <th>Maque / Modele</th>
+            <td>{{ vehicule.modele }}</td>
         </tr>
         <tr>
             <th>Plaque</th>
@@ -23,11 +23,22 @@
         </tr>
         <tr>
             <th>Kilometrage</th>
-            <td>{{ vehicule.kilometrage }}</td>
+            <td>{{ vehicule.kilometrage|number_format(0, ',', ' ') }}</td>
         </tr>
         <tr>
             <th>Etat</th>
             <td>{{ vehicule.etat }}</td>
+        </tr>
+
+        <tr>
+            <th>Location</th>
+            <td>
+                <ul style="list-style: none">
+                    {% for location in vehicule.locations %}
+                    <li><a href="{{ path('location_show', {'id': location.id}) }}">{{location}}</a></li>
+                    {% endfor %}
+                </ul>
+            </td>
         </tr>
     </tbody>
 </table>
