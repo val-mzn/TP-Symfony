@@ -27,7 +27,7 @@
 <table class="table table-dark table-striped table-bordered">
     <thead>
         <tr>
-            <th colspan="5">
+            <th colspan="7">
                 <h1 style="text-align: center;">Liste des location</h1>
             </th>
         </tr>
@@ -36,17 +36,31 @@
             <th>Vehicule</th>
             <th>Debut</th>
             <th>Fin</th>
+            <th>Durée</th>
+            <th>Prix</th>
             <th>actions</th>
         </tr>
     </thead>
     <tbody>
         {% for location in locations %}
         <tr>
+            <td>
+                <a href="{{ path('client_show', {'id': location.client.id}) }}">
+                    {{ location.client }}
+                </a>
+            </td>
 
-            <td>{{ location.client }}</td>
-            <td>{{ location.vehicule }}</td>
+            <td>
+                <a href="{{ path('vehicule_show', {'id': location.vehicule.id}) }}">
+                    {{ location.vehicule }}
+                </a>
+            </td>
             <td>{{ location.debut ? location.debut|date('Y-m-d') : '' }}</td>
             <td>{{ location.fin ? location.fin|date('Y-m-d') : '' }}</td>
+
+            <td>{{ location.duree}} jours</td>
+            <td>{{ location.prix|number_format(0, ',', ' ') }}€</td>
+
             <td>
                 <a class="btn btn-secondary" href="{{ path('location_show', {'id': location.id}) }}">Voir</a>
                 <a class="btn btn-primary" href="{{ path('location_edit', {'id': location.id}) }}">Modifier</a>
@@ -67,7 +81,8 @@
     </tbody>
 </table>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter une location</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter une
+    location</button>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

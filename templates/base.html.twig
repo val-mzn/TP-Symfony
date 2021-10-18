@@ -6,24 +6,7 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         <style>
-            body {
-                background: linear-gradient(135deg, #8BC6EC, #9599E2, #8BC6EC, #9599E2);
-                background-size: 400% 400%;
-                animation: gradient 15s ease infinite;
-                height: 100vh;
-            }
-
-            @keyframes gradient {
-                0% {
-                    background-position: 0% 50%;
-                }
-                50% {
-                    background-position: 100% 50%;
-                }
-                100% {
-                    background-position: 0% 50%;
-                }
-            }
+            {% include "global.css" %}    
         </style>
         <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

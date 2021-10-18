@@ -32,8 +32,17 @@ class LocationController extends AbstractController
             return $this->redirectToRoute('location_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $locations = $locationRepository->findAll();
+        $locations_with_price = [];
+        foreach($locations as $l){
+            $duration = $l->getFin()->getTimestamp() - $l->getDebut()->getTimestamp();
+            $l->duree = $duration/60/60/24;
+            $l->prix = $duration/60/60/24 * $l->getVehicule()->getModele()->getTarif();
+            array_push($locations_with_price, $l);
+        }
+
         return $this->render('location/index.html.twig', [
-            'locations' => $locationRepository->findAll(),
+            'locations' => $locations_with_price,
             'form' => $form->createView(),
         ]);
     }

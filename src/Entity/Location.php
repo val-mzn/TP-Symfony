@@ -91,4 +91,9 @@ class Location
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->client . " " . $this->debut->format('d/m/Y') . " - " . $this->fin->format('d/m/Y');
+    }
 }

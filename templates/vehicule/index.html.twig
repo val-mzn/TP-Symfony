@@ -27,7 +27,7 @@
 <table class="table table-dark table-striped table-bordered">
     <thead>
         <tr>
-            <th colspan="5">
+            <th colspan="6">
                 <h1 style="text-align: center;">Liste des véhicules</h1>
             </th>
         </tr>
@@ -36,6 +36,7 @@
             <th>Plaque</th>
             <th>Kilometrage</th>
             <th>Etat</th>
+            <th>Location</th>
             <th>actions</th>
         </tr>
     </thead>
@@ -47,6 +48,14 @@
             <td>{{ vehicule.plaque }}</td>
             <td>{{ vehicule.kilometrage }}</td>
             <td>{{ vehicule.etat }}</td>
+
+            <td>
+                <ul style="list-style: none">
+                    {% for location in vehicule.locations %}
+                    <li><a href="{{ path('location_show', {'id': location.id}) }}">{{location}}</a></li>
+                    {% endfor %}
+                </ul>
+            </td>
             <td>
                 <a class="btn btn-secondary" href="{{ path('vehicule_show', {'id': vehicule.id}) }}">Voir</a>
                 <a class="btn btn-primary" href="{{ path('vehicule_edit', {'id': vehicule.id}) }}">Modifer</a>
