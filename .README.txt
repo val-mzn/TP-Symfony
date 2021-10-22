@@ -1,0 +1,14 @@
+--- # Commande effectuer pendant le developpement # ---
+php bin/console make:entity Client
+php bin/console make:entity Location
+php bin/console make:entity Marque
+php bin/console make:entity Modele
+php bin/console make:entity Vehicule
+php bin/console make:crud Client
+php bin/console make:crud Location
+php bin/console make:crud Vehicule
+
+--- # Commande pour lancer projet # ---
+php bin/console doctrine:database:create
+php bin/console doctrine:fixture:load
+symfony serve
