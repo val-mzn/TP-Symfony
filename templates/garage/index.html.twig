@@ -26,7 +26,8 @@
             <td>{{ vehicule.kilometrage|number_format(0, ',', ' ') }}</td>
             <td>{{ vehicule.etat }}</td>
             <td>
-                <a role="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">louer</a>
+                <a role="button" onclick='setVehicule({{ vehicule.id }})' class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">louer</a>
             </td>
         </tr>
         {% else %}
@@ -47,9 +48,7 @@
             </div>
             <div class="modal-body">
                 {{ form_start(form) }}
-                {{ form_row(form.debut) }}
-                {{ form_row(form.fin) }}
-                {{ form_row(form.client) }}
+                {{ form_widget(form) }}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
@@ -60,4 +59,10 @@
     </div>
 </div>
 
+<script>
+    document.getElementById("location_vehicule").parentElement.style.display = "none"
+    function setVehicule(index) {
+        document.getElementById("location_vehicule").value = index
+    }
+</script>
 {% endblock %}

@@ -51,11 +51,7 @@ class GarageController extends AbstractController
         $form = $this->createForm(LocationType::class, $location);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-
-            $location->setVehicule($vehicules_dispo[0]);
-
-            // REMOVE DE FORM_IS_VALID CAR PASSAIT PAS
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($location);
             $entityManager->flush();

@@ -7,6 +7,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Marque;
 use App\Entity\Modele;
 use App\Entity\Vehicule;
+use App\Entity\Client;
 
 class AppFixtures extends Fixture
 {
@@ -80,20 +81,36 @@ class AppFixtures extends Fixture
         $ds4->setMarque($citroen);
         $manager->persist($ds4);
 
-        $vehicule = new Vehicule();
-        $vehicule->setModele($c1);
-        $vehicule->setPlaque("WD742FG");
-        $vehicule->setKilometrage(120000);
-        $vehicule->setEtat("marquée parchoc avant et arrière");
-        $manager->persist($vehicule);
+        $vehicule0 = new Vehicule();
+        $vehicule0->setModele($c1);
+        $vehicule0->setPlaque("WD742FG");
+        $vehicule0->setKilometrage(120000);
+        $vehicule0->setEtat("marquée parchoc avant et arrière");
+        $manager->persist($vehicule0);
         
-        $vehicule = new Vehicule();
-        $vehicule->setModele($ds4);
-        $vehicule->setPlaque("TB230NM");
-        $vehicule->setKilometrage(50000);
-        $vehicule->setEtat("quasi neuve");
-        $manager->persist($vehicule);
-    
+        $vehicule1 = new Vehicule();
+        $vehicule1->setModele($ds4);
+        $vehicule1->setPlaque("TB230NM");
+        $vehicule1->setKilometrage(50000);
+        $vehicule1->setEtat("quasi neuve");
+        $manager->persist($vehicule1);
+
+        $vehicule2 = new Vehicule();
+        $vehicule2->setModele($twingo);
+        $vehicule2->setPlaque("EE666RR");
+        $vehicule2->setKilometrage(50000);
+        $vehicule2->setEtat("ammochée");
+        $manager->persist($vehicule2);
+        
+        $client0 = new Client();
+        $client0->setNom("Manzon");
+        $client0->setPrenom("Valentino");
+        $client0->setTelephone("0783001122");
+        $client0->setAdresse("LA SUISSE");
+        $client0->setVille("GENF");
+        $client0->setCp(1200);
+        $manager->persist($client0);
+
         $manager->flush();
     }
 }
